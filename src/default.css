@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,500');
+
+/* DEFAULTS [S] */
+
+:root {
+  --bg-color: rgb(188,3,43);
+  --font-color: black;
+  --white-color: white;
+}
+
+body {
+  background: var(--bg-color);
+  font-family: 'Roboto Slab';
+  /* overflow: hidden; */
+}
+
+/* DEFAULTS [E] */

@@ -1,0 +1,24 @@
+.shop {
+  min-height: 100px;
+  margin: 20px 0;
+}
+
+.shop > .list {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  justify-content: flex-end;
+  margin-left: 30px;
+}
+
+.shop > .list > div {
+  margin: 1em 1em !important;
+  cursor: pointer;
+  transition: box-shadow 500ms ease-in-out;
+}
+
+@media (min-width: 768px) { 
+  .shop > .list {
+    justify-content: center;
+  }
+}

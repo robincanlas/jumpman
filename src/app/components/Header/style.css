@@ -1,0 +1,74 @@
+#header {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  width: calc(100vh - 40px);
+  padding: 10px 20px;
+  transform: rotate(-90deg);
+  top: 100%;
+  transform-origin: left top;
+  z-index: 2;
+}
+
+#header > span > a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+#header > span:nth-child(1) {
+  font-size: 2em;
+  font-weight: bolder;
+}
+
+#header > span:nth-child(n+2) {
+  margin-left: 10px;
+  display: block;
+  position: relative;
+  text-transform: uppercase;
+  font-size: 1em;
+}
+
+#header > span:nth-child(2) {
+  margin-left: 30px;
+}
+
+#header > span:nth-child(5) {
+  flex: 1;
+  text-align: right;
+}
+
+#header > span:nth-child(5) > i {
+  transform: rotate(90deg);
+  transform-origin: center;
+}
+
+#header > span:not(:first-child):not(:last-child)::after {
+  content: '';
+  background: black;
+  transform-origin: left;
+  transform: scale(0);
+  transition: transform 500ms ease-in-out;
+  height: 1px;
+  width: 25px;
+  display: block;
+  position: absolute;
+}
+
+#header > span:not(:first-child):not(:last-child):hover::after{
+  transform: scale(1);
+}
+
+@media (min-width: 768px) { 
+  #header {
+    width: calc(100vw - 15px);
+    transform: rotate(0deg);
+    top: 0%;
+    position: absolute;
+  }
+
+  #header > span:nth-child(5) > i {
+    transform: rotate(0deg);
+    cursor: pointer;
+  }
+}

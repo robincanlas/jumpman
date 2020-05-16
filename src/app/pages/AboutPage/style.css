@@ -1,0 +1,14 @@
+.about {
+  min-height: 100px;
+  margin-left: 40px;
+  padding: 10px 5px;
+  text-align: center;
+  font-size: 1.4em;
+  margin-bottom: 15px;
+}
+
+@media (min-width: 768px) { 
+  .about {
+    margin-left: 0;
+  }
+}

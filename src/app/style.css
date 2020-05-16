@@ -1,0 +1,11 @@
+.jumpman {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.jumpman > svg {
+  width: 125px;
+}
