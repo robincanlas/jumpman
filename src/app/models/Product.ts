@@ -1,6 +1,6 @@
-export namespace Product {
-	export interface Model {
-		public_id: string; 
+export namespace Models {
+	export interface Product {
+		image: string; 
 		name: string;
 		price: number;
 	}

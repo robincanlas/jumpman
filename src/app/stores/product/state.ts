@@ -1,9 +1,9 @@
-import { Product } from 'app/models';
+import { Models } from 'app/models';
 
 export const initialState: ProductState = {
 	products: []
 };
 
 export type ProductState = {
-	products: Product.Model[];
+	products: Models.Product[];
 };

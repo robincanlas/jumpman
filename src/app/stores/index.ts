@@ -11,7 +11,7 @@ import {
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { logger } from 'app/middlewares';
 import { ReduxCompatibleReducer } from 'redux-actions';
-import { Product } from 'app/models';
+import { Models } from 'app/models';
 
 export interface RootState {
 	product: ProductState;
@@ -26,7 +26,7 @@ export function configureStore(initialState?: RootState): Store<RootState> {
 	}
 
 	const rootReducer = combineReducers<RootState>({
-		product: productReducer as ReduxCompatibleReducer<ProductState, Product.Model[]>
+		product: productReducer as ReduxCompatibleReducer<ProductState, Models.Product[]>
 	});
 
 	const store = createStore(rootReducer as any, initialState as any, middleware) as Store<

@@ -2,6 +2,9 @@ import * as React from 'react';
 import * as style from './style.css';
 import { HomePage, AboutPage, ContactPage, ShopPage } from 'app/pages';
 import { Header, Jumpman, Loader } from 'app/components';
+import { Models } from 'app/models';
+import axios from 'axios';
+import useSWR from 'swr';
 
 export namespace App {
 	export interface Props {
@@ -13,47 +16,44 @@ export namespace App {
 	}
 }
 
-export class App extends React.Component<App.Props, App.State> {
-	constructor(props: App.Props, context?: any) {
-		super(props, context);
+export const App: React.FC<App.Props> = ({}: App.Props) => {
+	const [isLoading, setIsLoading] = React.useState(true);
 
-		this.state = {
-			isLoading: true
-		};
-
-		this.disableLoading = this.disableLoading.bind(this);
-	}
-
-	public disableLoading() {
-		this.setState({
-			isLoading: false
+	const fetcher = (url: string) =>
+	axios.get(url)
+		.then(r => r.data)
+		.then((shoes: Models.Product[]) => {
+			return shoes;
 		});
-	}
 
-	public render() {
-		const quote: string = `"I've missed more than 9000 shots in my career. I've lost almost 300 games. 26 times, I've been trusted to take the game winning shot and missed. I've failed over and over and over again in my life. And that is why I succeed."`;
-		const author: string = '-Michael Jordan';
+	const { data }: any = useSWR('https://robincanlas-server.herokuapp.com/jumpman/shoes', fetcher);
 
-		return (			
-			<React.Fragment>
-				{this.state.isLoading ?
-					<Loader disableLoading={this.disableLoading} /> :
-					<span>
-						<Header />
-						<div className={style.jumpman}>
-							<Jumpman />
-							<div>
-								<p>{quote}</p>
-								<p>{author}</p>
-							</div>
+	const disableLoading = () => {
+		setIsLoading(false);
+	};
+
+	const quote: string = `"I've missed more than 9000 shots in my career. I've lost almost 300 games. 26 times, I've been trusted to take the game winning shot and missed. I've failed over and over and over again in my life. And that is why I succeed."`;
+	const author: string = '-Michael Jordan';
+
+	return (			
+		<React.Fragment>
+			{isLoading ?
+				<Loader disableLoading={disableLoading} /> :
+				<span>
+					<Header />
+					<div className={style.jumpman}>
+						<Jumpman />
+						<div>
+							<p>{quote}</p>
+							<p>{author}</p>
 						</div>
-						<HomePage />
-						<ShopPage />
-						<AboutPage />
-						<ContactPage />
-					</span>
-				}
-		</React.Fragment> 
-		);
-	}
+					</div>
+					<HomePage />
+					<ShopPage shoes={data} />
+					<AboutPage />
+					<ContactPage />
+				</span>
+			}
+	</React.Fragment> 
+	);
 }

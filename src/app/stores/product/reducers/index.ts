@@ -1,10 +1,10 @@
 import { handleActions } from 'redux-actions';
 import { ProductActions } from './../actions';
-import { Product } from 'app/models';
+import { Models } from 'app/models';
 import { ProductState, initialState } from '../state';
 import update from 'immutability-helper';
 
-export const productReducer = handleActions<ProductState, Product.Model[]>(
+export const productReducer = handleActions<ProductState, Models.Product[]>(
 	{
 		[ProductActions.Type.GET_PRODUCT_REQUEST]: (state, action) => {
 			return state;
