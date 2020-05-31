@@ -60,8 +60,12 @@
   transform: scale(1);
 }
 
-.wishCount {
-  font-size: .7em;
+#card {
+  min-height: 170px;
+}
+
+.wishContent {
+  padding-left: .5rem !important;
 }
 
 @media (min-width: 768px) { 
