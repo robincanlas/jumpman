@@ -41,37 +41,37 @@ const _Header: React.FC<_Header.Props> = ({
 				</Modal.Content>
 				:
 				<React.Fragment>
-					<Modal.Content className={style.wishContent}>
-							<Grid>
-								{wishList.map(product => (
-									<Grid.Column key={product.name} mobile={16} tablet={8} computer={4}>
-										<Card.Group stackable>
-											<Card fluid id={style.card}>
-												<Card.Content>
-													<Image
-														floated='right'
-														size='mini'
-														src={product.image}
-														wrapped
-													/>
-													<Card.Header>{product.name}</Card.Header>
-													<Card.Meta>${product.price}</Card.Meta>
-												</Card.Content>
-												<Card.Content extra>
-													<div className='ui two buttons'>
-														<Button basic color='green'>
-															Checkout
-														</Button>
-														<Button onClick={() => wishListActions.remove(product.id)} basic color='red'>
-															Remove
-														</Button>
-													</div>
-												</Card.Content>
-											</Card>
-										</Card.Group>
-									</Grid.Column>
-									))}
-							</Grid>
+					<Modal.Content className={style.wishContent} scrolling>
+						<Grid>
+							{wishList.map(product => (
+								<Grid.Column key={product.name} mobile={16} tablet={8} computer={4}>
+									<Card.Group stackable>
+										<Card fluid id={style.card}>
+											<Card.Content>
+												<Image
+													floated='right'
+													size='mini'
+													src={product.image}
+													wrapped
+												/>
+												<Card.Header>{product.name}</Card.Header>
+												<Card.Meta>${product.price}</Card.Meta>
+											</Card.Content>
+											<Card.Content extra>
+												<div className='ui two buttons'>
+													<Button basic color='green'>
+														Checkout
+													</Button>
+													<Button onClick={() => wishListActions.remove(product.id)} basic color='red'>
+														Remove
+													</Button>
+												</div>
+											</Card.Content>
+										</Card>
+									</Card.Group>
+								</Grid.Column>
+								))}
+						</Grid>
 					</Modal.Content>
 					<Modal.Actions>
 						<Button color='red' onClick={() => wishListActions.removeAll()}>
