@@ -1,21 +1,29 @@
 import { handleActions } from 'redux-actions';
-import { ProductActions } from './../actions';
 import { Models } from 'app/models';
 import { ProductState, initialState } from '../state';
 import update from 'immutability-helper';
+import { ActionType } from 'app/constants';
 
 export const productReducer = handleActions<ProductState, Models.Product[]>(
 	{
-		[ProductActions.Type.GET_PRODUCT_REQUEST]: (state, action) => {
-			return state;
+		[ActionType.GET_PRODUCT_REQUEST]: (state, action) => {
+			return {
+				...state,
+				isLoading: true
+			};
 		},
-		[ProductActions.Type.GET_PRODUCT_SUCCESS]: (state, action) => {
+		[ActionType.GET_PRODUCT_SUCCESS]: (state, action) => {
 			return update(state, {
-				products: { $set: action.payload }
+				products: { $set: action.payload },
+				isLoading: { $set: false }
 			});
 		},
-		[ProductActions.Type.GET_PRODUCT_FAILURE]: (state, action) => {
-			return state;
+		[ActionType.GET_PRODUCT_FAILURE]: (state, action) => {
+			return {
+				...state,
+				isLoading: false,
+				error: 'ERROR FETCHING PRODUCTS'
+			};
 		},
 	},
 	initialState

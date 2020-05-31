@@ -9,24 +9,23 @@ import {
 	Store
 } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { logger } from 'app/middlewares';
+// import { logger } from 'app/middlewares';
 import { ReduxCompatibleReducer } from 'redux-actions';
 import { Models } from 'app/models';
 
 export interface RootState {
-	product: ProductState;
-	router?: any;
+	productState: ProductState;
 }
 
 export function configureStore(initialState?: RootState): Store<RootState> {
-	let middleware = applyMiddleware(logger, thunk);
+	let middleware = applyMiddleware(thunk);
 
 	if (secrets.app.environment !== 'production') {
 		middleware = composeWithDevTools(middleware);
 	}
 
 	const rootReducer = combineReducers<RootState>({
-		product: productReducer as ReduxCompatibleReducer<ProductState, Models.Product[]>
+		productState: productReducer as ReduxCompatibleReducer<ProductState, Models.Product[]>
 	});
 
 	const store = createStore(rootReducer as any, initialState as any, middleware) as Store<

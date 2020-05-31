@@ -2,9 +2,6 @@ import * as React from 'react';
 import * as style from './style.css';
 import { HomePage, AboutPage, ContactPage, ShopPage } from 'app/pages';
 import { Header, Jumpman, Loader } from 'app/components';
-import { Models } from 'app/models';
-import axios from 'axios';
-import useSWR from 'swr';
 
 export namespace App {
 	export interface Props {
@@ -18,15 +15,6 @@ export namespace App {
 
 export const App: React.FC<App.Props> = ({}: App.Props) => {
 	const [isLoading, setIsLoading] = React.useState(true);
-
-	const fetcher = (url: string) =>
-	axios.get(url)
-		.then(r => r.data)
-		.then((shoes: Models.Product[]) => {
-			return shoes;
-		});
-
-	const { data }: any = useSWR('https://robincanlas-server.herokuapp.com/jumpman/shoes', fetcher);
 
 	const disableLoading = () => {
 		setIsLoading(false);
@@ -49,7 +37,7 @@ export const App: React.FC<App.Props> = ({}: App.Props) => {
 						</div>
 					</div>
 					<HomePage />
-					<ShopPage shoes={data} />
+					<ShopPage />
 					<AboutPage />
 					<ContactPage />
 				</span>

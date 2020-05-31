@@ -70,5 +70,6 @@
   #header > span:nth-child(5) > i {
     transform: rotate(0deg);
     cursor: pointer;
+    margin-left: 10px;
   }
 }

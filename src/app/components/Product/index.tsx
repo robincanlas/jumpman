@@ -47,39 +47,29 @@ export const Product: React.FC<Product.Props> = (props: Product.Props) => {
 	const getModal = (): JSX.Element => {
 		return (
 			<Modal onClose={onCloseModal} open={modalOpen} trigger={getCard()}>
-			<Modal.Header>Buy the {props.data.name}?</Modal.Header>
-			<Modal.Content image>
-				<Image size='medium' src={props.data.image} />
-				<Modal.Description>
-					<Header as='h2'>{props.data.name}</Header>
-					<p>
-						Product #: 1917500{props.index}
-					</p>
-
-					<Header as='h3'>Made For Fashionable Athleticism</Header>
-					<p>
-						Maintain your confident style on and off the court with this pair of Jordan Men's {props.data.name} shoes. Designed to keep up with athletic activities and offer flair for everyday wear, the shoe's features can be easily paired with different outfits. Rounding out its complete look, the Jumpman logo on the ankle makes an athletic statement, and the words “Team Jordan” on the heel reinforce the message.
-					</p>
-
-					{/* <Header as='h4'>Jordan Men's Jumpman Team II features:</Header>
-					<p>
-						• Classic Jordan mid-ankle silhouette.
-						• Jumpman logo adds athletic appeal.
-						• Made of durable full-grain leather and textile.
-						• Cushioned by forefoot Air Sole® unit for comfort and support.
-						• Outsole made of solid rubber to provide great traction.
-					</p> */}
-				</Modal.Description>
-			</Modal.Content>
-			<Modal.Actions>
-				<Button color='red' onClick={onCloseModal}>
-					<Icon name='remove' size='large' /> Cancel
-				</Button>
-				<Button color='green' onClick={onCloseModal}>
-					<Icon name='cart plus' size='large' /> Buy
-				</Button>
-			</Modal.Actions>
-		</Modal>
+				<Modal.Header>Buy the {props.data.name}?</Modal.Header>
+				<Modal.Content image>
+					<Image size='medium' src={props.data.image} />
+					<Modal.Description>
+						<Header as='h2'>{props.data.name}</Header>
+						<p>
+							Product #: 1917500{props.index}
+						</p>
+						<Header as='h3'>Made For Fashionable Athleticism</Header>
+						<p>
+							Maintain your confident style on and off the court with this pair of Jordan Men's {props.data.name} shoes. Designed to keep up with athletic activities and offer flair for everyday wear, the shoe's features can be easily paired with different outfits. Rounding out its complete look, the Jumpman logo on the ankle makes an athletic statement, and the words “Team Jordan” on the heel reinforce the message.
+						</p>
+					</Modal.Description>
+				</Modal.Content>
+				<Modal.Actions>
+					<Button color='red' onClick={onCloseModal}>
+						<Icon name='remove' size='large' /> Cancel
+					</Button>
+					<Button color='green' onClick={onCloseModal}>
+						<Icon name='cart plus' size='large' /> Buy
+					</Button>
+				</Modal.Actions>
+			</Modal>
 		);
 	};
 

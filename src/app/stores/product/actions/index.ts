@@ -3,25 +3,20 @@ import { AnyAction } from 'redux';
 import { createAction } from 'redux-actions';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { Models } from 'app/models';
-import Axios from 'axios';
+import { endpointUrl, ActionType } from 'app/constants';
+import axios from 'axios';
 
 type Thunk = ThunkAction<Promise<void>, {}, {}, AnyAction>;
 
 export namespace ProductActions {
-	export enum Type {
-		GET_PRODUCT_REQUEST = 'GET_PRODUCT_REQUEST',
-		GET_PRODUCT_SUCCESS = 'GET_PRODUCT_SUCCESS',
-		GET_PRODUCT_FAILURE = 'GET_PRODUCT_FAILURE',
-	}
-
 	export const getProducts = (): Thunk => {
-		const request = createAction(Type.GET_PRODUCT_REQUEST);
-		const success = createAction<Models.Product[]>(Type.GET_PRODUCT_SUCCESS);
-		const failure = createAction<string>(Type.GET_PRODUCT_FAILURE);
+		const request = createAction(ActionType.GET_PRODUCT_REQUEST);
+		const success = createAction<Models.Product[]>(ActionType.GET_PRODUCT_SUCCESS);
+		const failure = createAction<string>(ActionType.GET_PRODUCT_FAILURE);
 
 		return (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
 			dispatch(request());
-			return Axios.get('')
+			return axios.get(endpointUrl.shoes)
 			.then(response => {
 				dispatch(success(response.data));
 			})
@@ -33,4 +28,4 @@ export namespace ProductActions {
 	};
 }
 
-export type ProductActions = Omit<typeof ProductActions, 'Type'>;
+export type ProductActions = typeof ProductActions;
