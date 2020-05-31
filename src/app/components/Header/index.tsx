@@ -20,6 +20,10 @@ const _Header: React.FC<_Header.Props> = ({
 	wishListActions = WishListActions
 }: _Header.Props) => {
 
+	const getTotal = (): number => {
+		return wishList.reduce((total, current) => { return +total + +current.price; }, 0);
+	};
+
 	const getWishList = (): JSX.Element => {
 		return (
 			<Modal trigger={
@@ -73,7 +77,7 @@ const _Header: React.FC<_Header.Props> = ({
 							<Icon name='remove' size='large' /> Remove All
 						</Button>
 						<Button color='green'>
-							<Icon name='cart plus' size='large' /> Checkout All 
+							<Icon name='cart plus' size='large' /> Checkout All - ${getTotal()}
 						</Button>
 					</Modal.Actions>
 				</React.Fragment>
@@ -82,9 +86,22 @@ const _Header: React.FC<_Header.Props> = ({
 		);
 	};
 
-	// const getShoppingCart = () => {
-
-	// };
+	const getShoppingCart = () => {
+		return (
+			<Modal trigger={
+				<Icon size='big' name='shopping cart'>
+				</Icon>
+			} closeIcon>
+				<Modal.Header>You have {wishList.length} item(s) on your cart</Modal.Header>
+				<Modal.Content>
+					<Message info>
+						<Message.Header>Oh! It looks empty here.</Message.Header>
+						<p>You can add some products here.</p>
+					</Message> 
+				</Modal.Content>
+			</Modal>
+		);
+	};
 
 	return (
 		<header id={style.header}>
@@ -102,7 +119,7 @@ const _Header: React.FC<_Header.Props> = ({
 			</span>
 			<span>
 				{getWishList()}
-				<Icon size='big' name='shopping cart' />
+				{getShoppingCart()}
 			</span>
 		</header>
 	);

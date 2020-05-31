@@ -18,7 +18,6 @@ export const wishListReducer = handleActions<WishListState, Models.Product | num
 			};
 		},
 		[ActionType.REMOVE_ALL_TO_WISHLIST]: (state, action) => {
-			console.log('boooom');
 			return {
 				list: []
 			};
