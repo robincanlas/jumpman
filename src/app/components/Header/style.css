@@ -41,6 +41,7 @@
 #header > span:nth-child(5) > i {
   transform: rotate(90deg);
   transform-origin: center;
+  margin-left: 10px;
 }
 
 #header > span:not(:first-child):not(:last-child)::after {
@@ -59,6 +60,10 @@
   transform: scale(1);
 }
 
+.wishCount {
+  font-size: .7em;
+}
+
 @media (min-width: 768px) { 
   #header {
     width: calc(100vw - 15px);
@@ -70,6 +75,6 @@
   #header > span:nth-child(5) > i {
     transform: rotate(0deg);
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 25px;
   }
 }

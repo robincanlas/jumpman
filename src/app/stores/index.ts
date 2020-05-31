@@ -2,6 +2,8 @@ import secrets from 'app/secrets';
 import thunk from 'redux-thunk';
 import { productReducer } from './product/reducers';
 import { ProductState } from './product/state';
+import { WishListState } from './wishlist/state';
+import { wishListReducer } from './wishlist/reducers';
 import {
 	applyMiddleware,
 	combineReducers,
@@ -15,6 +17,7 @@ import { Models } from 'app/models';
 
 export interface RootState {
 	productState: ProductState;
+	wishListState: WishListState;
 }
 
 export function configureStore(initialState?: RootState): Store<RootState> {
@@ -25,7 +28,8 @@ export function configureStore(initialState?: RootState): Store<RootState> {
 	}
 
 	const rootReducer = combineReducers<RootState>({
-		productState: productReducer as ReduxCompatibleReducer<ProductState, Models.Product[]>
+		productState: productReducer as ReduxCompatibleReducer<ProductState, Models.Product[]>,
+		wishListState: wishListReducer as ReduxCompatibleReducer<WishListState, Models.Product>
 	});
 
 	const store = createStore(rootReducer as any, initialState as any, middleware) as Store<
@@ -43,3 +47,4 @@ export function configureStore(initialState?: RootState): Store<RootState> {
 }
 
 export * from './product/reducers';
+export * from './wishlist/reducers';

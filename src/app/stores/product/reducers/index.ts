@@ -13,8 +13,9 @@ export const productReducer = handleActions<ProductState, Models.Product[]>(
 			};
 		},
 		[ActionType.GET_PRODUCT_SUCCESS]: (state, action) => {
+			const products: Models.Product[] = action.payload.map((element, index) => ({ ...element, id: index + 1}));
 			return update(state, {
-				products: { $set: action.payload },
+				products: { $set: products },
 				isLoading: { $set: false }
 			});
 		},

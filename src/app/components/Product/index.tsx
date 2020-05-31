@@ -2,21 +2,29 @@ import * as React from 'react';
 import * as style from './style.css';
 import { Card, Icon, Image, Modal, Header, Button } from 'semantic-ui-react';
 import { Models } from 'app/models';
+import { WishListActions } from 'app/stores/wishlist/actions';
 
 export namespace Product {
 	export interface Props {
 		data: Models.Product;
+		wishList: Models.Product[];
 		index: number;
+		wishListActions: WishListActions;
 	}
 }
 
 export const Product: React.FC<Product.Props> = (props: Product.Props) => {
-	const [wish, setToWish] = React.useState(false);
+	// const [wish, setToWish] = React.useState(false);
 	const [modalOpen, setModalOpen] = React.useState(false);
+	const wish: Models.Product | undefined = props.wishList.find(element => element.id === props.data.id);
 
 	const wishThis = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 		e.stopPropagation();
-		setToWish(!wish);
+		if (wish) {
+			props.wishListActions.remove(props.data.id);
+		} else {
+			props.wishListActions.add(props.data);
+		}
 	};
 
 	const onCloseModal = () => {
@@ -33,7 +41,11 @@ export const Product: React.FC<Product.Props> = (props: Product.Props) => {
 					<Card.Meta className={style['date-icon']}>
 						<span className='date'>2020</span>
 						<span>
-							<Icon onClick={wishThis} size='large' name='heart' color={wish ? 'red' : undefined}  />
+							<Icon 
+								onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => wishThis(e)} 
+								size='large' 
+								name='heart' 
+								color={wish ? 'red' : undefined} />
 						</span>
 					</Card.Meta>
 					<Card.Description>
@@ -46,14 +58,14 @@ export const Product: React.FC<Product.Props> = (props: Product.Props) => {
 
 	const getModal = (): JSX.Element => {
 		return (
-			<Modal onClose={onCloseModal} open={modalOpen} trigger={getCard()}>
+			<Modal onClose={onCloseModal} open={modalOpen} trigger={getCard()} closeIcon>
 				<Modal.Header>Buy the {props.data.name}?</Modal.Header>
 				<Modal.Content image>
 					<Image size='medium' src={props.data.image} />
 					<Modal.Description>
 						<Header as='h2'>{props.data.name}</Header>
 						<p>
-							Product #: 1917500{props.index}
+							Product #: 1917500{props.data.id}
 						</p>
 						<Header as='h3'>Made For Fashionable Athleticism</Header>
 						<p>
