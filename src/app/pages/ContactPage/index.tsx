@@ -6,9 +6,7 @@ export const ContactPage: React.FC = () => {
 
 	return(
 		<div id='contact' className={style.contact}>
-			<p>
-				<p>© {currentYear}, Designed {`&`} Coded by Kristoffer Robin Canlas</p>
-			</p>
+			<p>© {currentYear}, Designed {`&`} Coded by Kristoffer Robin Canlas</p>
 		</div>
 	);
 };

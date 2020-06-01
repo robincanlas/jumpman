@@ -26,12 +26,14 @@ export const _Loader: React.FC<_Loader.Props> = ({
 	const [count, setCount] = React.useState(0);
 
 	React.useEffect(() => {
-		const end: number = isLoading ? 50 : 100;
+		const end: number = isLoading ? 70 : 100;
 		const counter = setInterval(() => {
-			if (end === 100 && start === end) {
+			if (count === end) {
 				clearInterval(counter);
-				document.body.style.overflowY = 'auto';
-				disableLoading();
+				if (count === 100) {
+					document.body.style.overflowY = 'auto';
+					disableLoading();
+				}
 				return;
 			}
 			start++;
@@ -45,7 +47,7 @@ export const _Loader: React.FC<_Loader.Props> = ({
 		return(() => {
 			clearInterval(counter);
 		});
-	}, [isLoading, error]);
+	}, [isLoading, error, count]);
 
 	React.useEffect(() => {
 		productActions.getProducts();
