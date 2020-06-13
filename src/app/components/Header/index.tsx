@@ -1,113 +1,39 @@
 import * as React from 'react';
 import * as style from './style.css';
 import { HashLink as Link } from 'react-router-hash-link';
-import { Icon, Modal, Card, Image, Button, Message, Grid } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { RootState } from 'app/stores';
 import { Dispatch, bindActionCreators } from 'redux';
 import { WishListActions } from 'app/stores/wishlist/actions';
 import { Models } from 'app/models';
+import { Wishlist, ShoppingCart } from 'app/components';
 
 namespace _Header {
 	export interface Props {
 		wishList?: Models.Product[];
 		wishListActions?: WishListActions;
+		setVisible: (visible: boolean) => void;
 	}
 }
 
 const _Header: React.FC<_Header.Props> = ({
 	wishList = [],
-	wishListActions = WishListActions
+	wishListActions = WishListActions,
+	setVisible
 }: _Header.Props) => {
-
-	const getTotal = (): number => {
-		return wishList.reduce((total, current) => { return +total + +current.price; }, 0);
-	};
-
-	const getWishList = (): JSX.Element => {
-		return (
-			<Modal trigger={
-				<Icon size='big' name='heart'>
-				<sup className={style.wishCount}>{wishList.length}</sup>
-				</Icon>
-			} closeIcon>
-				<Modal.Header>You have {wishList.length} item(s) on your wishlist</Modal.Header>
-				{wishList.length === 0 ? 
-				<Modal.Content>
-					<Message info>
-						<Message.Header>Oh! It looks empty here.</Message.Header>
-						<p>You can add some products here.</p>
-					</Message> 
-				</Modal.Content>
-				:
-				<React.Fragment>
-					<Modal.Content className={style.wishContent} scrolling>
-						<Grid>
-							{wishList.map(product => (
-								<Grid.Column key={product.name} mobile={16} tablet={8} computer={4}>
-									<Card.Group stackable>
-										<Card fluid id={style.card}>
-											<Card.Content>
-												<Image
-													floated='right'
-													size='mini'
-													src={product.image}
-													wrapped
-												/>
-												<Card.Header>{product.name}</Card.Header>
-												<Card.Meta>${product.price}</Card.Meta>
-											</Card.Content>
-											<Card.Content extra>
-												<div className='ui two buttons'>
-													<Button basic color='green'>
-														Checkout
-													</Button>
-													<Button onClick={() => wishListActions.remove(product.id)} basic color='red'>
-														Remove
-													</Button>
-												</div>
-											</Card.Content>
-										</Card>
-									</Card.Group>
-								</Grid.Column>
-								))}
-						</Grid>
-					</Modal.Content>
-					<Modal.Actions>
-						<Button color='red' onClick={() => wishListActions.removeAll()}>
-							<Icon name='remove' size='large' /> Remove All
-						</Button>
-						<Button color='green'>
-							<Icon name='cart plus' size='large' /> Checkout All - ${getTotal()}
-						</Button>
-					</Modal.Actions>
-				</React.Fragment>
-				}
-			</Modal>
-		);
-	};
-
-	const getShoppingCart = () => {
-		return (
-			<Modal trigger={
-				<Icon size='big' name='shopping cart'>
-				</Icon>
-			} closeIcon>
-				<Modal.Header>You have {wishList.length} item(s) on your cart</Modal.Header>
-				<Modal.Content>
-					<Message info>
-						<Message.Header>Oh! It looks empty here.</Message.Header>
-						<p>You can add some products here.</p>
-					</Message> 
-				</Modal.Content>
-			</Modal>
-		);
-	};
 
 	return (
 		<header id={style.header}>
 			<span>
 				<Link smooth to='/jumpman#home'>JUMPMAN</Link>
+			</span>
+			<span>
+			<div className={style.burger} onClick={() => setVisible(true)}>
+				<div className={style.bar1}></div>
+				<div className={style.bar2}></div>
+				<div className={style.bar3}></div>
+			</div>
 			</span>
 			<span>
 				<Link smooth to='/jumpman#shop'>shop</Link>
@@ -119,8 +45,16 @@ const _Header: React.FC<_Header.Props> = ({
 				<Link smooth to='/jumpman#contact'>contact</Link>
 			</span>
 			<span>
-				{getWishList()}
-				{getShoppingCart()}
+				<Wishlist trigger={
+					<Icon size='big' name='heart'>
+						<sup className={style.wishCount}>{wishList.length}</sup>
+					</Icon> } 
+				/>
+				<ShoppingCart trigger={
+					<Icon size='big' name='shopping cart'>
+					</Icon>
+					} 
+				/>
 			</span>
 		</header>
 	);

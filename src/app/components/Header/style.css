@@ -2,12 +2,11 @@
   display: flex;
   position: fixed;
   align-items: center;
-  width: calc(100vh - 40px);
+  width: 100%;
   padding: 10px 20px;
-  transform: rotate(-90deg);
-  top: 100%;
-  transform-origin: left top;
+  background-color: var(--bg-color);
   z-index: 2;
+  justify-content: space-between;
 }
 
 #header > span > a {
@@ -21,27 +20,18 @@
   font-weight: bolder;
 }
 
-#header > span:nth-child(n+2) {
-  margin-left: 10px;
-  display: block;
-  position: relative;
-  text-transform: uppercase;
-  font-size: 1em;
+#header > span:nth-child(n+3) {
+ display: none;
+ 
 }
 
-#header > span:nth-child(2) {
+#header > span:nth-child(3) {
   margin-left: 30px;
 }
 
-#header > span:nth-child(5) {
+#header > span:nth-child(6) {
   flex: 1;
   text-align: right;
-}
-
-#header > span:nth-child(5) > i {
-  transform: rotate(90deg);
-  transform-origin: center;
-  margin-left: 10px;
 }
 
 #header > span:not(:first-child):not(:last-child)::after {
@@ -56,16 +46,29 @@
   position: absolute;
 }
 
-#header > span:not(:first-child):not(:last-child):hover::after{
-  transform: scale(1);
+.burger {
+  display: inline-block;
+  cursor: pointer;
 }
 
-#card {
-  min-height: 170px;
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: black;
+  margin: 6px 0;
+  transition: 0.4s;
 }
 
-.wishContent {
-  padding-left: .5rem !important;
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 { opacity: 0; }
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
 }
 
 @media (min-width: 768px) { 
@@ -80,5 +83,21 @@
     transform: rotate(0deg);
     cursor: pointer;
     margin-left: 25px;
+  }
+
+  #header > span:nth-child(2) {
+    display: none;
+  }
+
+  #header > span:nth-child(n+3) {   
+    margin-left: 10px;
+    display: block;
+    position: relative;
+    text-transform: uppercase;
+    font-size: 1em;
+  }
+
+   #header > span:not(:first-child):not(:last-child):hover::after{
+    transform: scale(1);
   }
 }

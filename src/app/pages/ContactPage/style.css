@@ -1,7 +1,6 @@
 .contact {
   min-height: 100px;
   background: var(--font-color);
-  margin-left: 40px;
   color: white;
   display: flex;
   justify-content: center;
@@ -10,13 +9,8 @@
   border-top-left-radius: 5px;
 }
 
-.contact > p > a {
-  margin-left: 5px;
-}
-
 @media (min-width: 768px) { 
   .contact {
-    margin-left: 0;
     border-radius: 0;
   }
 }
