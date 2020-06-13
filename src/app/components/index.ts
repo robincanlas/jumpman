@@ -4,3 +4,4 @@ export * from './Header';
 export * from './Loader';
 export * from './Wishlist';
 export * from './ShoppingCart';
+export * from './MobileMenu';

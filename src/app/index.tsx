@@ -1,9 +1,8 @@
 import * as React from 'react';
 import * as style from './style.css';
 import { HomePage, AboutPage, ContactPage, ShopPage } from 'app/pages';
-import { Header, Jumpman, Loader, Wishlist, ShoppingCart } from 'app/components';
-import { Sidebar, Menu, Icon } from 'semantic-ui-react';
-import { HashLink as Link } from 'react-router-hash-link';
+import { Header, Jumpman, Loader, MobileMenu } from 'app/components';
+import { Sidebar, Menu } from 'semantic-ui-react';
 
 export namespace App {
 	export interface Props {
@@ -47,53 +46,11 @@ export const App: React.FC<App.Props> = ({}: App.Props) => {
 						width='thin'
 						style={{position: 'fixed'}}
 					>
-						<Menu.Item>
-							<Link smooth to='/jumpman#home'>
-								<Icon name='home' size='large' />
-								Home
-							</Link>
-						</Menu.Item>
-						<Menu.Item>
-							<Link smooth to='/jumpman#shop'>
-								<Icon name='shop' size='large' />
-								Shop
-							</Link>
-						</Menu.Item>
-						<Menu.Item>
-							<Link smooth to='/jumpman#about'>
-								<Icon name='question circle outline' size='large' />
-								About
-							</Link>
-						</Menu.Item>
-						<Menu.Item>
-							<Link smooth to='/jumpman#contact'>
-								<Icon name='phone square' size='large' />
-								Contact
-							</Link>
-						</Menu.Item>
-						<Menu.Item>
-							<ShoppingCart 
-								trigger={
-									<span>
-										<Icon name='shopping cart' />
-									Cart
-									</span>
-								}
-							/>
-						</Menu.Item>
-						<Menu.Item>
-							<Wishlist trigger={
-								<span>
-									<Icon name='heart' size='large' />
-									Wishlist
-								</span>
-							} 
-							/>
-						</Menu.Item>
+						<MobileMenu setVisible={setVisible} />
 					</Sidebar>
 
 					<Sidebar.Pusher dimmed={visible}>
-						<Header setVisible={setVisible} />
+						<Header visible={visible} setVisible={setVisible} />
 						<div className={style.jumpman}>
 							<Jumpman />
 							<div>
