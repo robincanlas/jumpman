@@ -1,5 +1,5 @@
 export const endpointUrl: { [key: string]: string; } = {
-	shoes: 'https://robincanlas-server-typescript.herokuapp.com/shoe'
+	shoes: 'https://robincanlas-server-typescript.onrender.com/shoe'
 };
 
 export enum ActionType {
